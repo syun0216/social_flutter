@@ -47,6 +47,38 @@ flutter:
    - images/logo-cat.svg
    - images/user.svg
    - images/password.svg
+   - images/check-outline.svg
+   - images/check.svg
+   - images/comment-outline.svg
+   - images/comment-single.svg
+   - images/comment.svg
+   - images/cross.svg
+   - images/date-from.svg
+   - images/date-to.svg
+   - images/email.svg
+   - images/gmap.png
+   - images/home.svg
+   - images/icon.png
+   - images/image_server_error.png
+   - images/info-outline.svg
+   - images/info.svg
+   - images/like-outline.svg
+   - images/info.svg
+   - images/like-outline.svg
+   - images/like.svg
+   - images/no-activity.svg
+   - images/past-outline.svg
+   - images/past.svg
+   - images/people.svg
+   - images/people-outline.svg
+   - images/reply.svg
+   - images/search.svg
+   - images/search.svg
+   - images/send.svg
+   - images/splash.png
+   - images/time.svg
+   - toTop.png
+   - user.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

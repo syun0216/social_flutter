@@ -12,6 +12,9 @@ class _PersonState extends State<Person> {
       appBar: AppBar(
         title: Text('Person'),
       ),
+      body: Center(
+        child: Text('This is the person page'),
+      ),
     );
   }
 }
