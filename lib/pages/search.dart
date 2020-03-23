@@ -9,6 +9,21 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+  bool _isLike = false;
+  bool _isGoing = false;
+
+  void _likeAction() {
+    setState(() {
+      _isLike = !_isLike;
+    });
+  }
+
+  void _goingAction() {
+    setState(() {
+      _isGoing = !_isGoing;
+    });
+  }
+
   void _toPersonPage(context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Person()));
   }
@@ -16,6 +31,10 @@ class _SearchState extends State<Search> {
   void _toDetailPage(context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Details()));
   }
+
+  // Future<null> _refresh() async {
+  //   return null;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -278,37 +297,53 @@ class _SearchState extends State<Search> {
               ),
               Row(
                 children: <Widget>[
-                  Row(children: <Widget>[
-                    Container(
-                      child: SvgPicture.asset(
-                        'images/check-outline.svg',
-                        color: Color(0xFFAC8EC9),
+                  InkWell(
+                    child: Row(children: <Widget>[
+                      Container(
+                        child: _isGoing
+                            ? SvgPicture.asset('images/check.svg',
+                                color: Color(0xFFAECB4F))
+                            : SvgPicture.asset(
+                                'images/check-outline.svg',
+                                color: Color(0xFFAC8EC9),
+                              ),
+                        width: 18.0,
+                        height: 18.0,
+                        padding: const EdgeInsets.only(right: 5.0),
                       ),
-                      width: 18.0,
-                      height: 18.0,
-                      padding: const EdgeInsets.only(right: 5.0),
-                    ),
-                    Text('I am going!',
-                        style: TextStyle(
-                            color: Color(0xFF453257),
-                            fontSize: 12.0,
-                            fontFamily: 'SourceSansPro-Regular')),
-                  ]),
+                      Text(_isGoing ? 'I am going!' : '6 Going',
+                          style: TextStyle(
+                              color: Color(0xFF453257),
+                              fontSize: 12.0,
+                              fontFamily: 'SourceSansPro-Regular')),
+                    ]),
+                    onTap: () {
+                      _goingAction();
+                    },
+                  ),
                   Padding(padding: const EdgeInsets.only(right: 31.0)),
-                  Row(children: <Widget>[
-                    Container(
-                      child: SvgPicture.asset('images/like-outline.svg',
-                          color: Color(0xFFAC8EC9)),
-                      width: 18.0,
-                      height: 18.0,
-                      padding: const EdgeInsets.only(right: 5.0),
-                    ),
-                    Text('I like it',
-                        style: TextStyle(
-                            color: Color(0xFF453257),
-                            fontSize: 12.0,
-                            fontFamily: 'SourceSansPro-Regular')),
-                  ]),
+                  InkWell(
+                    child: Row(children: <Widget>[
+                      Container(
+                        child: _isLike
+                            ? SvgPicture.asset('images/like.svg',
+                                color: Color(0xFFFF5C5C))
+                            : SvgPicture.asset('images/like-outline.svg',
+                                color: Color(0xFFAC8EC9)),
+                        width: 18.0,
+                        height: 18.0,
+                        padding: const EdgeInsets.only(right: 5.0),
+                      ),
+                      Text(_isLike ? 'I like it' : '10 Likes',
+                          style: TextStyle(
+                              color: Color(0xFF453257),
+                              fontSize: 12.0,
+                              fontFamily: 'SourceSansPro-Regular')),
+                    ]),
+                    onTap: () {
+                      _likeAction();
+                    },
+                  )
                 ],
               )
             ],
@@ -317,15 +352,20 @@ class _SearchState extends State<Search> {
   }
 
   Widget _listView(context) {
-    return (ListView(
-      children: <Widget>[
-        InkWell(
-          child: _listViewItem(context),
-          onTap: () {
-            _toDetailPage(context);
-          },
-        )
-      ],
+    return (RefreshIndicator(
+      child: ListView(
+        children: <Widget>[
+          InkWell(
+            child: _listViewItem(context),
+            onTap: () {
+              _toDetailPage(context);
+            },
+          )
+        ],
+      ),
+      onRefresh: () {
+        print('onRefresh');
+      },
     ));
   }
 }
